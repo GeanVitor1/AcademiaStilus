@@ -1,0 +1,51 @@
+<section class="section modalities" id="modalidades">
+  <div class="container modalities-head">
+    <h2 class="display display-lg section-title" appReveal>Modalidades</h2>
+    <p class="section-sub" appReveal [appRevealDelay]="80">
+      Seis maneiras de treinar. Cada uma com um objetivo e um ritmo próprios.
+    </p>
+  </div>
+
+  <div class="modalities-stage">
+    <div class="modalities-bg" aria-hidden="true">
+      @for (modality of modalities; track modality.id; let i = $index) {
+        <img
+          class="modalities-bg-img"
+          [class.is-active]="activeIndex() === i"
+          [src]="modality.image"
+          alt=""
+          width="1600"
+          height="1067"
+          decoding="async"
+        />
+      }
+      <div class="modalities-bg-scrim"></div>
+    </div>
+
+    <div class="modality-caption">
+      <div class="container">
+        @for (modality of modalities; track modality.id; let i = $index) {
+          <div class="modality-caption-item" [class.is-active]="activeIndex() === i">
+            <div class="modality-item-icon" aria-hidden="true">
+              <i class="ph" [class]="modality.icon"></i>
+            </div>
+            <p class="modality-item-kicker">{{ modality.kicker }}</p>
+            <h3 class="modality-item-name display display-md">{{ modality.name }}</h3>
+            <p class="modality-item-blurb">{{ modality.blurb }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="modalities-content">
+    @for (modality of modalities; track modality.id; let i = $index) {
+      <article
+        class="modality-item"
+        appTrackActive
+        (activeChange)="onActiveChange($event, i)"
+        aria-hidden="true"
+      ></article>
+    }
+  </div>
+</section>

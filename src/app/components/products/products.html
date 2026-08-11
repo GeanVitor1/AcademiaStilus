@@ -1,0 +1,35 @@
+<section class="section products" id="produtos">
+  <div class="container">
+    <div class="products-head">
+      <h2 class="display display-lg section-title" appReveal>Produtos oficiais</h2>
+      <p class="products-note" appReveal [appRevealDelay]="80">
+        Camisas e meias da Academia Stilus. Valores e pagamento ilustrativos, para demonstração.
+      </p>
+    </div>
+
+    <div class="products-grid">
+      @for (product of products; track product.id; let i = $index) {
+        <article class="product-card" appReveal [appRevealDelay]="(i % 4) * 90">
+          <div class="product-media">
+            <img
+              [src]="product.image"
+              [alt]="product.name"
+              [width]="900"
+              [height]="900"
+              loading="lazy"
+            />
+          </div>
+          <div class="product-body">
+            <p class="product-category">{{ product.category }}</p>
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-blurb">{{ product.blurb }}</p>
+            <p class="product-price">{{ formatPrice(product.price) }}</p>
+            <a class="btn btn-outline product-cta" [routerLink]="['/checkout', product.id]">
+              Comprar
+            </a>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+.location {
+  background: var(--bg-raised);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: center;
+  gap: 64px;
+}
+
+.location-address {
+  margin: 0 0 32px;
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+.location-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.location-map {
+  position: relative;
+  height: 440px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.location-map-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.location-map-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 32px;
+  text-align: center;
+  background: var(--surface);
+}
+
+.location-map-fallback-address {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.7;
+  max-width: 32ch;
+}
+
+@media (max-width: 1023px) {
+  .location-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}

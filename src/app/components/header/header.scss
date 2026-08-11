@@ -1,0 +1,130 @@
+.header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 100;
+  height: 64px;
+  background: rgba(10, 10, 11, 0.86);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.brand img {
+  height: 34px;
+  width: auto;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.nav-link {
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: var(--yellow);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-whatsapp {
+  background: rgba(255, 214, 10, 0.06);
+}
+
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--text);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  position: fixed;
+  inset: 64px 0 0;
+  z-index: 99;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  padding: 32px 24px 48px;
+  overflow-y: auto;
+}
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.mobile-link {
+  display: block;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.mobile-link:hover {
+  color: var(--yellow);
+}
+
+.mobile-cta {
+  margin-top: 24px;
+}
+
+@media (max-width: 1023px) {
+  .nav {
+    display: none;
+  }
+  .header-whatsapp-label {
+    display: none;
+  }
+  .header-whatsapp {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    font-size: 1.15rem;
+  }
+  .menu-toggle {
+    display: inline-flex;
+  }
+}

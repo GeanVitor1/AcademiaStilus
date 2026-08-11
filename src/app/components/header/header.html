@@ -1,0 +1,42 @@
+<header class="header">
+  <div class="container header-inner">
+    <a class="brand" href="#inicio" (click)="closeMenu()" aria-label="Academia Stilus - início">
+      <img src="assets/logo.png" alt="Logo da Academia Stilus" width="196" height="98" />
+    </a>
+
+    <nav class="nav" aria-label="Navegação principal">
+      @for (link of navLinks; track link.href) {
+        <a class="nav-link" [href]="link.href" (click)="closeMenu()">{{ link.label }}</a>
+      }
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-outline btn-sm header-whatsapp" [href]="whatsappUrl" target="_blank" rel="noopener">
+        <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+        <span class="header-whatsapp-label">Fale no WhatsApp</span>
+      </a>
+      <button
+        class="menu-toggle"
+        [attr.aria-expanded]="menuOpen()"
+        aria-label="Abrir menu"
+        (click)="menuOpen.set(!menuOpen())"
+      >
+        <i class="ph" [class]="menuOpen() ? 'ph ph-x' : 'ph ph-list'" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
+  @if (menuOpen()) {
+    <div class="mobile-menu">
+      <nav class="mobile-nav" aria-label="Menu móvel">
+        @for (link of navLinks; track link.href) {
+          <a class="mobile-link" [href]="link.href" (click)="closeMenu()">{{ link.label }}</a>
+        }
+        <a class="btn btn-yellow mobile-cta" [href]="whatsappUrl" target="_blank" rel="noopener" (click)="closeMenu()">
+          <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+          Fale no WhatsApp
+        </a>
+      </nav>
+    </div>
+  }
+</header>

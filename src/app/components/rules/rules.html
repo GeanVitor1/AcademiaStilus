@@ -1,0 +1,25 @@
+<section class="section rules" id="regras">
+  <div class="container">
+    <h2 class="display display-lg section-title" appReveal>Regras da casa</h2>
+    <p class="section-sub" appReveal [appRevealDelay]="80">
+      Seis regras simples para que o treino de todos funcione bem.
+    </p>
+
+    <div class="rules-grid">
+      @for (rule of rules; track rule.id; let i = $index) {
+        <article
+          class="rule-card"
+          [class.rule-card-highlight]="rule.highlight"
+          appReveal
+          [appRevealDelay]="(i % 3) * 90"
+        >
+          <div class="rule-top">
+            <span class="rule-index">{{ i + 1 }}</span>
+            <i class="ph rule-icon" [class]="rule.icon" aria-hidden="true"></i>
+          </div>
+          <h3 class="rule-title">{{ rule.title }}</h3>
+        </article>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+<section class="section teachers" id="professores">
+  <div class="container teachers-grid">
+    <div class="teachers-number" appReveal>
+      <p class="teachers-count">{{ teacherCount }}</p>
+      <p class="teachers-label">professores</p>
+    </div>
+
+    <div class="teachers-copy" appReveal [appRevealDelay]="120">
+      <h2 class="display display-md section-title">Equipe completa para acompanhar você</h2>
+      <p class="lead">
+        A Academia Stilus conta com uma equipe de {{ teacherCount }} professores
+        para acompanhar os alunos nas modalidades e no treino diário.
+      </p>
+      <div class="teachers-tiles" aria-hidden="true">
+        @for (tile of tiles; track tile) {
+          <span class="teachers-tile"></span>
+        }
+      </div>
+    </div>
+  </div>
+</section>

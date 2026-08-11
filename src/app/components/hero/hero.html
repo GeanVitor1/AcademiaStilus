@@ -1,0 +1,37 @@
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="hero-overline" data-hero-animate="0">
+        <i class="ph ph-barbell" aria-hidden="true"></i>
+        Academia Stilus
+      </p>
+      <h1 class="display display-xl hero-title" data-hero-animate="1">
+        Treine forte.<br />
+        <span class="hero-title-accent">Viva Stilus.</span>
+      </h1>
+      <p class="lead hero-sub" data-hero-animate="2">
+        Musculação, treinamento funcional e aulas coletivas em Ilhéus.
+        Estrutura completa com uma equipe de {{ teacherCount }} professores.
+      </p>
+      <div class="hero-actions" data-hero-animate="3">
+        <a class="btn btn-yellow" href="#modalidades">Conheça as modalidades</a>
+        <a class="btn btn-outline" [href]="whatsappUrl" target="_blank" rel="noopener">
+          <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+          Fale no WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual" data-hero-animate="2">
+      <div class="hero-frame" aria-hidden="true"></div>
+      <img
+        class="hero-image"
+        src="assets/academia-frente.jpg"
+        alt="Fachada da Academia Stilus"
+        width="1264"
+        height="843"
+        fetchpriority="high"
+      />
+    </div>
+  </div>
+</section>

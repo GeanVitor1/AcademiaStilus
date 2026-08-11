@@ -1,0 +1,69 @@
+.teachers {
+  background: var(--bg-raised);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.teachers-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  align-items: center;
+  gap: 72px;
+}
+
+.teachers-number {
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.teachers-count {
+  margin: 0;
+  color: var(--yellow);
+  font-weight: 900;
+  font-stretch: 118%;
+  line-height: 1;
+  font-size: clamp(7rem, 16vw, 11rem);
+  letter-spacing: -0.04em;
+}
+
+.teachers-label {
+  margin: 8px 0 0;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.teachers-copy .lead {
+  margin-bottom: 32px;
+}
+
+.teachers-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(34px, 1fr));
+  gap: 8px;
+  max-width: 560px;
+}
+
+.teachers-tile {
+  aspect-ratio: 1;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.teachers-tile:hover {
+  background: var(--yellow);
+  border-color: var(--yellow);
+}
+
+@media (max-width: 1023px) {
+  .teachers-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}

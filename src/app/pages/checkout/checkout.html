@@ -1,0 +1,124 @@
+<section class="checkout">
+  <div class="container">
+    <div class="checkout-top">
+      <a class="btn btn-outline btn-sm" routerLink="/">
+        <i class="ph ph-arrow-left" aria-hidden="true"></i>
+        Voltar para a loja
+      </a>
+      <h1 class="display display-md checkout-title">Finalizar compra</h1>
+    </div>
+
+    @if (product(); as product) {
+      <div class="checkout-grid">
+        <div class="checkout-summary">
+          <div class="checkout-product">
+            <div class="checkout-media">
+              <img [src]="product.image" [alt]="product.name" loading="lazy" />
+            </div>
+            <div class="checkout-info">
+              <p class="checkout-category">{{ product.category }}</p>
+              <h2 class="checkout-name">{{ product.name }}</h2>
+              <p class="checkout-blurb">{{ product.blurb }}</p>
+            </div>
+          </div>
+
+          <dl class="checkout-lines">
+            <div class="checkout-line">
+              <dt>Quantidade</dt>
+              <dd>1</dd>
+            </div>
+            <div class="checkout-line">
+              <dt>Subtotal</dt>
+              <dd>{{ formatPrice(product.price) }}</dd>
+            </div>
+          </dl>
+
+          <div class="checkout-total">
+            <span>Total</span>
+            <strong>{{ formatPrice(product.price) }}</strong>
+          </div>
+        </div>
+
+        <div class="checkout-payment">
+          <h2 class="checkout-payment-title">Pagamento</h2>
+          <p class="checkout-payment-note">
+            Pagamento demonstrativo. Nenhum valor real é cobrado nesta simulação.
+          </p>
+
+          <div class="pix-method">
+            <i class="ph ph-qr-code pix-method-icon" aria-hidden="true"></i>
+            <div>
+              <p class="pix-method-name">Pix</p>
+              <p class="pix-method-hint">Aprovado na hora</p>
+            </div>
+            <span class="pix-method-badge">Selecionado</span>
+          </div>
+
+          @if (state() !== 'paid') {
+            <div class="pix-qr-block">
+              <p class="pix-qr-label">Escaneie o QR Code para pagar</p>
+              <div class="pix-qr-box" aria-label="QR Code fictício para demonstração">
+                @if (qrReady() && qrDataUrl()) {
+                  <img [src]="qrDataUrl()" alt="QR Code fictício para demonstração do Pix" width="320" height="320" />
+                } @else {
+                  <span class="pix-qr-loading"></span>
+                }
+              </div>
+              <p class="pix-qr-caption">QR Code fictício, apenas para demonstração.</p>
+
+              <div class="pix-code-row">
+                <input
+                  class="pix-code-input"
+                  [value]="pixCode()"
+                  readonly
+                  aria-label="Código Pix copia e cola (demonstrativo)"
+                />
+                <button class="btn btn-outline btn-sm pix-copy" (click)="copyPixCode()">
+                  <i class="ph" [class]="copied() ? 'ph-check' : 'ph-copy'" aria-hidden="true"></i>
+                  {{ copied() ? 'Copiado' : 'Copiar' }}
+                </button>
+              </div>
+              <p class="pix-code-note">Código Pix demonstrativo. Não efetua pagamento real.</p>
+            </div>
+          }
+
+          @switch (state()) {
+            @case ('pending') {
+              <button class="btn btn-yellow pix-cta" (click)="simulatePayment()">
+                Simular pagamento
+              </button>
+            }
+            @case ('paying') {
+              <button class="btn btn-yellow pix-cta" disabled>
+                <i class="ph ph-circle-notch pix-spin" aria-hidden="true"></i>
+                Processando simulação
+              </button>
+            }
+            @case ('paid') {
+              <div class="pix-success">
+                <i class="ph ph-check-circle pix-success-icon" aria-hidden="true"></i>
+                <p class="pix-success-title">Pagamento simulado com sucesso</p>
+                <p class="pix-success-note">
+                  Esta é uma simulação. Finalize o pedido no WhatsApp da Academia Stilus.
+                </p>
+                <a class="btn btn-yellow pix-cta" [href]="whatsappLink()" target="_blank" rel="noopener">
+                  <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+                  Continuar no WhatsApp
+                </a>
+              </div>
+            }
+          }
+        </div>
+      </div>
+    } @else {
+      <div class="checkout-empty">
+        <i class="ph ph-shopping-bag" aria-hidden="true"></i>
+        <h2 class="display display-md">Produto não encontrado</h2>
+        <p class="checkout-empty-note">
+          O produto que você procura não está disponível. Volte para a loja e escolha outro.
+        </p>
+        <a class="btn btn-yellow" routerLink="/">Ver produtos</a>
+      </div>
+    }
+  </div>
+</section>

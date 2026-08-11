@@ -1,0 +1,37 @@
+<section class="section about" id="academia">
+  <div class="container about-grid">
+    <div class="about-visual" appReveal>
+      <img
+        src="assets/academia-entrada.jpg"
+        alt="Entrada da Academia Stilus"
+        width="1536"
+        height="1024"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="about-copy" appReveal [appRevealDelay]="120">
+      <h2 class="display display-lg section-title">A Academia Stilus</h2>
+      <p class="lead">
+        A Academia Stilus fica na Rua Pitágoras, 446, no Teotônio Vilela, em Ilhéus (BA).
+        O espaço reúne musculação, treinamento funcional, aulas coletivas e mais,
+        com uma equipe de {{ teacherCount }} professores.
+      </p>
+
+      <dl class="about-stats">
+        <div class="about-stat">
+          <dt class="about-stat-label">Professores</dt>
+          <dd class="about-stat-value">{{ teacherCount }}</dd>
+        </div>
+        <div class="about-stat">
+          <dt class="about-stat-label">Modalidades</dt>
+          <dd class="about-stat-value">{{ modalityCount }}</dd>
+        </div>
+        <div class="about-stat">
+          <dt class="about-stat-label">Local</dt>
+          <dd class="about-stat-value">Ilhéus - BA</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>

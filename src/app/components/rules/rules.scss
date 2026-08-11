@@ -1,0 +1,83 @@
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.rule-card {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 26px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rule-card:hover {
+  border-color: var(--yellow);
+  background: var(--surface-raised);
+}
+
+.rule-card-highlight {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--yellow-ink);
+}
+
+.rule-card-highlight .rule-index,
+.rule-card-highlight .rule-icon {
+  color: var(--yellow-ink);
+}
+
+.rule-card-highlight .rule-title {
+  color: var(--yellow-ink);
+}
+
+.rule-card-highlight:hover {
+  background: var(--yellow-hover);
+  border-color: var(--yellow-hover);
+}
+
+.rule-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rule-index {
+  color: var(--yellow);
+  font-weight: 900;
+  font-stretch: 115%;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.rule-icon {
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--yellow);
+}
+
+.rule-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.35;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  max-width: 24ch;
+}
+
+@media (max-width: 1023px) {
+  .rules-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .rules-grid {
+    grid-template-columns: 1fr;
+  }
+}

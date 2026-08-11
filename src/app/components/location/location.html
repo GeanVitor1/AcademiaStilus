@@ -1,0 +1,39 @@
+<section class="section location" id="localizacao">
+  <div class="container location-grid">
+    <div class="location-copy" appReveal>
+      <h2 class="display display-lg section-title">Onde estamos</h2>
+      <p class="location-address">
+        {{ address.street }}<br />
+        {{ address.district }}<br />
+        {{ address.cep }}
+      </p>
+      <div class="location-actions">
+        <a class="btn btn-yellow" [href]="mapsUrl" target="_blank" rel="noopener">
+          <i class="ph ph-map-pin" aria-hidden="true"></i>
+          Abrir no Google Maps
+          <i class="ph ph-arrow-up-right" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-outline" [href]="whatsappUrl" target="_blank" rel="noopener">
+          <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+          Fale no WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="location-map">
+      <div class="location-map-fallback" aria-hidden="true">
+        <p class="location-map-fallback-address">{{ address.full }}</p>
+        <a class="btn btn-yellow" [href]="mapsUrl" target="_blank" rel="noopener">
+          <i class="ph ph-map-pin" aria-hidden="true"></i>
+          Abrir no Google Maps
+        </a>
+      </div>
+      <div
+        class="location-map-canvas"
+        #map
+        role="region"
+        aria-label="Mapa da Academia Stilus na Rua Pitágoras, 446, Teotônio Vilela, Ilhéus - BA"
+      ></div>
+    </div>
+  </div>
+</section>

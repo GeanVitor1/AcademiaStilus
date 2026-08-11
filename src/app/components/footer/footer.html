@@ -1,0 +1,37 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="Logo da Academia Stilus" width="200" height="100" />
+        <p class="footer-tagline">Treine forte. Viva Stilus.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Links do rodapé">
+        <h2 class="footer-heading">Navegação</h2>
+        <a href="#inicio">Início</a>
+        <a href="#academia">A Academia</a>
+        <a href="#modalidades">Modalidades</a>
+        <a href="#cursos">Cursos</a>
+        <a href="#produtos">Produtos</a>
+        <a href="#localizacao">Localização</a>
+      </nav>
+
+      <div class="footer-contact">
+        <h2 class="footer-heading">Contato</h2>
+        <p class="footer-address">
+          {{ address.street }}<br />
+          {{ address.district }}<br />
+          {{ address.cep }}
+        </p>
+        <a class="footer-whatsapp" [href]="whatsapp.contactUrl" target="_blank" rel="noopener">
+          <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+          {{ whatsapp.phoneDisplay }}
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {{ year }} Academia Stilus. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
