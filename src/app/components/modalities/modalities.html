@@ -1,6 +1,6 @@
 <section class="section modalities" id="modalidades">
   <div class="container modalities-head">
-    <h2 class="display display-lg section-title" appReveal>Modalidades</h2>
+    <h2 class="display display-lg section-title" appTextReveal>Modalidades</h2>
     <p class="section-sub" appReveal [appRevealDelay]="80">
       Seis maneiras de treinar. Cada uma com um objetivo e um ritmo próprios.
     </p>
@@ -12,6 +12,7 @@
         <img
           class="modalities-bg-img"
           [class.is-active]="activeIndex() === i"
+          [class.modalities-bg-img-dim]="modality.dim"
           [src]="modality.image"
           alt=""
           width="1600"
@@ -23,6 +24,19 @@
     </div>
 
     <div class="modality-caption">
+      @for (modality of modalities; track modality.id; let i = $index) {
+        @if (modality.teacher) {
+          <div class="modality-teacher" [class.is-active]="captionIndex() === i">
+            <img
+              [src]="modality.teacher"
+              [alt]="'Instrutor de ' + modality.name"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        }
+      }
+
       <div class="container">
         @for (modality of modalities; track modality.id; let i = $index) {
           <div class="modality-caption-item" [class.is-active]="captionIndex() === i">

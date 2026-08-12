@@ -5,6 +5,8 @@ export interface Modality {
   blurb: string;
   icon: string;
   image: string;
+  teacher?: string;
+  dim?: boolean;
 }
 
 export interface Course {
@@ -31,6 +33,16 @@ export interface GymRule {
   highlight?: boolean;
 }
 
+export interface GymPlan {
+  id: string;
+  name: string;
+  price: number;
+  period: string;
+  icon: string;
+  features: string[];
+  highlight?: boolean;
+}
+
 export const GYM_NAME = 'Academia Stilus';
 
 export const GYM_ADDRESS = {
@@ -43,6 +55,8 @@ export const GYM_ADDRESS = {
 export const GYM_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   GYM_ADDRESS.full
 )}`;
+
+export const GYM_INSTAGRAM_URL = 'https://www.instagram.com/academia_stilus/';
 
 export const GYM_COORDS = {
   lat: -14.8063028,
@@ -64,6 +78,7 @@ export const MODALITIES: Modality[] = [
       'Movimentos naturais do dia a dia combinados com força e estabilidade. Um treino completo que melhora postura, coordenação e condicionamento — ideal para qualquer nível, do iniciante ao avançado.',
     icon: 'ph-person-simple-run',
     image: 'assets/modalidades/modalidade-funcional.jpg',
+    teacher: 'assets/modalidades/prof-funcional.png',
   },
   {
     id: 'hitdance',
@@ -73,6 +88,8 @@ export const MODALITIES: Modality[] = [
       'Coreografias de alta intensidade ao som de muita música. Queime calorias, solte o corpo e fortaleça o coração em uma aula cheia de energia, onde a diversão é tão importante quanto o esforço.',
     icon: 'ph-heartbeat',
     image: 'assets/modalidades/modalidade-hitdance.jpg',
+    teacher: 'assets/modalidades/prof-hitdance.png',
+    dim: true,
   },
   {
     id: 'fitdance',
@@ -82,6 +99,17 @@ export const MODALITIES: Modality[] = [
       'A música guia cada movimento. Aulas animadas que trabalham o corpo inteiro enquanto você se diverte — sem coreografia complicada, no seu próprio ritmo e com acompanhamento de perto.',
     icon: 'ph-music-notes',
     image: 'assets/modalidades/modalidade-fitdance.jpg',
+    teacher: 'assets/modalidades/prof-fitdance.png',
+  },
+  {
+    id: 'crossfit',
+    name: 'CrossFit',
+    kicker: 'Força · Agilidade · Condicionamento',
+    blurb:
+      'Treinos de alta intensidade baseados nos exercícios do CrossFit. WODs que combinam levantamento, ginástica e cardio para construir força, condicionamento e superação em cada treino.',
+    icon: 'ph-lightning',
+    image: 'assets/modalidades/modalidade-crossfit.jpg',
+    teacher: 'assets/modalidades/prof-crossfit.png',
   },
   {
     id: 'clube-ciclismo',
@@ -100,15 +128,6 @@ export const MODALITIES: Modality[] = [
       'Treine em turmas com acompanhamento próximo do professor. A energia do grupo mantém a constância e cada aula é uma chance de evoluir junto com quem também quer resultado.',
     icon: 'ph-users-three',
     image: 'assets/modalidades/modalidade-coletivas.jpg',
-  },
-  {
-    id: 'crossfit',
-    name: 'CrossFit',
-    kicker: 'Força · Agilidade · Condicionamento',
-    blurb:
-      'Treinos de alta intensidade baseados nos exercícios do CrossFit. WODs que combinam levantamento, ginástica e cardio para construir força, condicionamento e superação em cada treino.',
-    icon: 'ph-lightning',
-    image: 'assets/modalidades/modalidade-crossfit.jpg',
   },
 ];
 
@@ -205,10 +224,51 @@ export const RULES: GymRule[] = [
 export const NAV_LINKS = [
   { label: 'A Academia', href: '#academia' },
   { label: 'Modalidades', href: '#modalidades' },
-  { label: 'Cursos', href: '#cursos' },
+  { label: 'Planos', href: '#planos' },
   { label: 'Produtos', href: '#produtos' },
   { label: 'Regras', href: '#regras' },
   { label: 'Localização', href: '#localizacao' },
+];
+
+export const PLANS: GymPlan[] = [
+  {
+    id: 'diaria',
+    name: 'Diária',
+    price: 15,
+    period: 'por dia',
+    icon: 'ph-ticket',
+    features: [
+      'Treino liberado por 1 dia',
+      'Acesso a todas as modalidades',
+      'Sem fidelidade',
+    ],
+  },
+  {
+    id: 'mensal',
+    name: 'Mensal',
+    price: 120,
+    period: 'por mês',
+    icon: 'ph-calendar-check',
+    features: [
+      'Treino liberado por 30 dias',
+      'Todas as modalidades',
+      'Acompanhamento dos professores',
+      'Horários livres',
+    ],
+    highlight: true,
+  },
+  {
+    id: 'gympass',
+    name: 'Gympass Basic+',
+    price: 99,
+    period: 'por mês via Gympass',
+    icon: 'ph-credit-card',
+    features: [
+      'Aceita Gympass',
+      'Plano Basic+ por R$ 99',
+      'Todas as modalidades',
+    ],
+  },
 ];
 
 export function formatPrice(value: number): string {

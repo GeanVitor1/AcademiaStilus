@@ -11,9 +11,14 @@
   gap: 72px;
 }
 
+.teachers-grid > * {
+  min-width: 0;
+}
+
 .teachers-number {
   border: 1px solid var(--line-strong);
   background: var(--bg);
+  border-radius: var(--radius);
   padding: 40px 32px;
   text-align: center;
 }
@@ -46,12 +51,14 @@
   grid-template-columns: repeat(auto-fill, minmax(34px, 1fr));
   gap: 8px;
   max-width: 560px;
+  width: 100%;
 }
 
 .teachers-tile {
   aspect-ratio: 1;
   border: 1px solid var(--line-strong);
   background: var(--surface);
+  border-radius: var(--radius-sm);
   transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }

@@ -1,0 +1,48 @@
+<section class="section plans" id="planos">
+  <div class="container">
+    <h2 class="display display-lg section-title" appTextReveal>Planos</h2>
+    <p class="section-sub" appReveal [appRevealDelay]="80">
+      Escolha o plano que combina com você. Diária, mensal ou Gympass.
+    </p>
+
+    <div class="plans-grid">
+      @for (plan of plans; track plan.id; let i = $index) {
+        <article
+          class="plan-card"
+          [class.plan-card-highlight]="plan.highlight"
+          appReveal
+          [appRevealDelay]="(i % 3) * 90"
+        >
+          <div class="plan-top">
+            <h3 class="plan-name">{{ plan.name }}</h3>
+            <i class="ph plan-icon" [class]="plan.icon" aria-hidden="true"></i>
+          </div>
+
+          <p class="plan-price">
+            <span class="plan-currency">R$</span>{{ plan.price }}
+          </p>
+          <p class="plan-period">{{ plan.period }}</p>
+
+          <ul class="plan-features">
+            @for (feature of plan.features; track feature) {
+              <li>
+                <i class="ph ph-check" aria-hidden="true"></i>
+                {{ feature }}
+              </li>
+            }
+          </ul>
+
+          <a
+            class="btn plan-cta"
+            [class.btn-yellow]="plan.highlight"
+            [href]="planLink(plan.name)"
+            target="_blank"
+            rel="noopener"
+          >
+            Quero este plano
+          </a>
+        </article>
+      }
+    </div>
+  </div>
+</section>

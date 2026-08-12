@@ -33,6 +33,7 @@
   height: 56px;
   border: 1px solid var(--line-strong);
   background: var(--surface);
+  border-radius: var(--radius-sm);
   color: var(--yellow);
   font-size: 1.6rem;
 }
@@ -48,6 +49,7 @@
   display: block;
   width: 100%;
   height: auto;
+  border-radius: var(--radius);
 }
 
 @media (max-width: 1023px) {

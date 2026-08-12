@@ -4,6 +4,7 @@ import { Facilities } from '../../components/facilities/facilities';
 import { Hero } from '../../components/hero/hero';
 import { Location } from '../../components/location/location';
 import { Modalities } from '../../components/modalities/modalities';
+import { Plans } from '../../components/plans/plans';
 import { Products } from '../../components/products/products';
 import { Rules } from '../../components/rules/rules';
 import { Teachers } from '../../components/teachers/teachers';
@@ -11,7 +12,7 @@ import { Teachers } from '../../components/teachers/teachers';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Hero, About, Modalities, Teachers, Facilities, Products, Rules, Location],
+  imports: [Hero, About, Modalities, Teachers, Facilities, Products, Rules, Plans, Location],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

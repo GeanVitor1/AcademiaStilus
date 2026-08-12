@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RevealDirective } from '../../directives/reveal.directive';
+import { TextRevealDirective } from '../../directives/text-reveal.directive';
 import { MODALITIES, TEACHER_COUNT } from '../../shared/catalog';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [RevealDirective],
+  imports: [RevealDirective, TextRevealDirective],
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })

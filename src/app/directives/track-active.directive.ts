@@ -25,7 +25,7 @@ export class TrackActiveDirective implements AfterViewInit, OnDestroy {
             this.activeChange.emit(entry.isIntersecting);
           }
         },
-        { threshold: 0.9 }
+        { threshold: 0.5 }
       );
       this.observer.observe(node);
       return;

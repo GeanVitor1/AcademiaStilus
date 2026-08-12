@@ -8,13 +8,14 @@ import {
 } from '@angular/core';
 import * as L from 'leaflet';
 import { RevealDirective } from '../../directives/reveal.directive';
+import { TextRevealDirective } from '../../directives/text-reveal.directive';
 import { GYM_ADDRESS, GYM_COORDS, GYM_MAPS_URL, GYM_NAME } from '../../shared/catalog';
 import { WhatsAppService } from '../../shared/whatsapp.service';
 
 @Component({
   selector: 'app-location',
   standalone: true,
-  imports: [RevealDirective],
+  imports: [RevealDirective, TextRevealDirective],
   templateUrl: './location.html',
   styleUrl: './location.scss',
 })

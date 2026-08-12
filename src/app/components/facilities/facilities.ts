@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RevealDirective } from '../../directives/reveal.directive';
+import { TextRevealDirective } from '../../directives/text-reveal.directive';
 
 @Component({
   selector: 'app-facilities',
   standalone: true,
-  imports: [RevealDirective],
+  imports: [RevealDirective, TextRevealDirective],
   templateUrl: './facilities.html',
   styleUrl: './facilities.scss',
 })

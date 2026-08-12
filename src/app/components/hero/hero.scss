@@ -53,6 +53,7 @@
   padding: 30px 34px;
   background: rgba(10, 10, 11, 0.84);
   border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
   transition: opacity 0.2s linear;
 }
 
@@ -64,6 +65,7 @@
   padding: 8px 14px;
   border: 1px solid var(--line-strong);
   background: var(--bg-raised);
+  border-radius: var(--radius-sm);
   color: var(--yellow);
   font-size: 0.75rem;
   font-weight: 800;
@@ -96,6 +98,44 @@
   }
   .hero-copy {
     padding: 22px 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-scroll {
+    padding-top: 64px;
+  }
+
+  .hero {
+    position: sticky;
+    top: 64px;
+    height: auto;
+    display: block;
+    overflow: hidden;
+  }
+
+  .hero-video {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .hero-video.is-hidden {
+    display: none;
+  }
+
+  .hero-scrim {
+    display: none;
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: none;
+    margin-inline: 0;
+    padding: 32px 0 48px;
   }
 }
 

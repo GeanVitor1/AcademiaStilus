@@ -23,6 +23,7 @@
 .checkout-summary {
   border: 1px solid var(--line-strong);
   background: var(--bg-raised);
+  border-radius: var(--radius);
   padding: 24px;
 }
 
@@ -41,6 +42,7 @@
   justify-content: center;
   border: 1px solid var(--line);
   background: var(--bg);
+  border-radius: var(--radius-sm);
   padding: 8px;
 }
 
@@ -118,6 +120,7 @@
 .checkout-payment {
   border: 1px solid var(--line-strong);
   background: var(--bg-raised);
+  border-radius: var(--radius);
   padding: 28px;
 }
 
@@ -142,6 +145,7 @@
   padding: 18px;
   border: 2px solid var(--yellow);
   background: var(--surface);
+  border-radius: var(--radius);
 }
 
 .pix-method-icon {
@@ -192,6 +196,7 @@
   height: 320px;
   border: 1px solid var(--line-strong);
   background: #ffffff;
+  border-radius: var(--radius);
   padding: 14px;
 }
 
@@ -232,7 +237,7 @@
   min-width: 0;
   padding: 12px 14px;
   border: 1px solid var(--line-strong);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   background: var(--bg);
   color: var(--text-dim);
   font-family: monospace;
@@ -261,6 +266,7 @@
   padding: 28px 24px;
   border: 2px solid var(--yellow);
   background: var(--surface);
+  border-radius: var(--radius);
   text-align: center;
 }
 
@@ -288,6 +294,7 @@
   padding: 64px 24px;
   border: 1px solid var(--line-strong);
   background: var(--bg-raised);
+  border-radius: var(--radius);
   text-align: center;
 }
 

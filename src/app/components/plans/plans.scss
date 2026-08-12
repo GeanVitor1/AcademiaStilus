@@ -1,0 +1,140 @@
+.plans {
+  background: var(--bg-raised);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.plan-card {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 28px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--radius);
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.plan-card:hover {
+  border-color: var(--yellow);
+  background: var(--surface-raised);
+}
+
+.plan-card-highlight {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--yellow-ink);
+}
+
+.plan-card-highlight:hover {
+  background: var(--yellow-hover);
+  border-color: var(--yellow-hover);
+}
+
+.plan-card-highlight .plan-icon,
+.plan-card-highlight .plan-name {
+  color: var(--yellow-ink);
+}
+
+.plan-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.plan-name {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.plan-icon {
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--yellow);
+}
+
+.plan-price {
+  margin: 0;
+  color: var(--yellow);
+  font-weight: 900;
+  font-stretch: 115%;
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.plan-card-highlight .plan-price {
+  color: var(--yellow-ink);
+}
+
+.plan-currency {
+  font-size: 0.5em;
+  font-weight: 800;
+  margin-right: 4px;
+  vertical-align: top;
+}
+
+.plan-period {
+  margin: 8px 0 24px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.plan-card-highlight .plan-period {
+  color: rgba(10, 10, 11, 0.65);
+}
+
+.plan-features {
+  list-style: none;
+  margin: 0 0 28px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.plan-features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.plan-features .ph {
+  flex-shrink: 0;
+  color: var(--yellow);
+  font-weight: 700;
+}
+
+.plan-card-highlight .plan-features .ph {
+  color: var(--yellow-ink);
+}
+
+.plan-cta {
+  margin-top: auto;
+  width: 100%;
+}
+
+@media (max-width: 1023px) {
+  .plans-grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin-inline: auto;
+  }
+}

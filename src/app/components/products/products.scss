@@ -34,6 +34,8 @@
   flex-direction: column;
   border: 1px solid var(--line);
   background: var(--surface);
+  border-radius: var(--radius);
+  overflow: hidden;
   transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;

@@ -78,7 +78,14 @@ export class Hero implements AfterViewInit, OnDestroy {
     }
   };
 
+  private isMobile(): boolean {
+    return window.matchMedia('(max-width: 767px)').matches;
+  }
+
   private applyPin = (): void => {
+    if (this.video) {
+      this.video.loop = false;
+    }
     const about = document.getElementById('academia');
     const aboutH = about ? about.getBoundingClientRect().height : 2 * window.innerHeight;
     const height = aboutH + window.innerHeight;
@@ -110,7 +117,11 @@ export class Hero implements AfterViewInit, OnDestroy {
     const scrollY = Math.max(0, -rect.top);
     const travel = Math.max(1, rect.height - window.innerHeight);
     const progress = Math.min(1, scrollY / travel);
-    this.textOpacity.set(1 - Math.min(1, progress / 0.6));
+    if (this.isMobile()) {
+      this.textOpacity.set(1);
+    } else {
+      this.textOpacity.set(1 - Math.min(1, progress / 0.6));
+    }
     const downTarget = Math.min(main.duration, (scrollY / travel) * main.duration);
     const upTarget = Math.min(main.duration, (scrollY / rect.height) * main.duration);
     const goingDown = scrollY > this.lastScrollY || (scrollY === this.lastScrollY && this.lastGoingDown);

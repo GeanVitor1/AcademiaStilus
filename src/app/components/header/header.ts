@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { NAV_LINKS } from '../../shared/catalog';
+import { GYM_INSTAGRAM_URL, NAV_LINKS } from '../../shared/catalog';
 import { WhatsAppService } from '../../shared/whatsapp.service';
 
 @Component({
@@ -12,6 +12,7 @@ import { WhatsAppService } from '../../shared/whatsapp.service';
 export class Header {
   readonly navLinks = NAV_LINKS;
   readonly menuOpen = signal(false);
+  readonly instagramUrl = GYM_INSTAGRAM_URL;
   private readonly whatsapp = inject(WhatsAppService);
 
   get whatsappUrl(): string {
