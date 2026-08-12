@@ -59,7 +59,8 @@ export class Location implements AfterViewInit, OnDestroy {
       return;
     }
     this.mapInited = true;
-    const L = await import('leaflet');
+    const mod = await import('leaflet');
+    const L = (mod.default ?? mod) as typeof import('leaflet');
 
     const el = this.mapContainer().nativeElement;
     const map = L.map(el, {
