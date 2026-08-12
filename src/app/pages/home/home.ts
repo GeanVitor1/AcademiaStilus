@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { About } from '../../components/about/about';
-import { Courses } from '../../components/courses/courses';
+import { Facilities } from '../../components/facilities/facilities';
 import { Hero } from '../../components/hero/hero';
 import { Location } from '../../components/location/location';
 import { Modalities } from '../../components/modalities/modalities';
@@ -11,7 +11,7 @@ import { Teachers } from '../../components/teachers/teachers';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Hero, About, Modalities, Teachers, Courses, Products, Rules, Location],
+  imports: [Hero, About, Modalities, Teachers, Facilities, Products, Rules, Location],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

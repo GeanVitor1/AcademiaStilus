@@ -1,0 +1,27 @@
+<section class="section facilities" id="estrutura">
+  <div class="container facilities-grid">
+    <div class="facilities-copy" appReveal>
+      <h2 class="display display-lg section-title">Estrutura completa</h2>
+      <ul class="facility-list">
+        @for (facility of facilities; track facility.name) {
+          <li class="facility-item">
+            <span class="facility-icon" aria-hidden="true">
+              <i class="ph" [class]="facility.icon"></i>
+            </span>
+            <span class="facility-name">{{ facility.name }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <aside class="facilities-photo" appReveal [appRevealDelay]="120">
+      <img
+        [src]="ownerPhoto"
+        alt="Dono da Academia Stilus"
+        width="1132"
+        height="1390"
+        loading="lazy"
+      />
+    </aside>
+  </div>
+</section>

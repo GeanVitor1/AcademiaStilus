@@ -12,11 +12,13 @@ import { MODALITIES } from '../../shared/catalog';
 })
 export class Modalities {
   readonly modalities = MODALITIES;
-  readonly activeIndex = signal(-1);
+  readonly activeIndex = signal(0);
+  readonly captionIndex = signal(-1);
 
   onActiveChange(active: boolean, index: number): void {
     if (active) {
       this.activeIndex.set(index);
+      this.captionIndex.set(index);
     }
   }
 }
