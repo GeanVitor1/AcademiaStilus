@@ -46,6 +46,7 @@ export class Hero implements AfterViewInit, OnDestroy {
     this.rev.muted = true;
     this.rev.defaultMuted = true;
     this.rev.pause();
+    this.resetScrollToTop();
     this.video.addEventListener('loadedmetadata', this.onMetadata);
     this.video.addEventListener('durationchange', this.onMetadata);
     this.applyPin();
@@ -53,6 +54,11 @@ export class Hero implements AfterViewInit, OnDestroy {
     this.scrub();
     window.addEventListener('scroll', this.scheduleScrub, { passive: true });
     window.addEventListener('resize', this.scheduleResize);
+  }
+
+  private resetScrollToTop(): void {
+    window.scrollTo(0, 0);
+    window.setTimeout(() => window.scrollTo(0, 0), 0);
   }
 
   ngOnDestroy(): void {
@@ -117,9 +123,7 @@ export class Hero implements AfterViewInit, OnDestroy {
     const scrollY = Math.max(0, -rect.top);
     const travel = Math.max(1, rect.height - window.innerHeight);
     const progress = Math.min(1, scrollY / travel);
-    if (this.isMobile()) {
-      this.textOpacity.set(1);
-    } else {
+    if (!this.isMobile()) {
       this.textOpacity.set(1 - Math.min(1, progress / 0.6));
     }
     const downTarget = Math.min(main.duration, (scrollY / travel) * main.duration);
@@ -173,7 +177,14 @@ export class Hero implements AfterViewInit, OnDestroy {
       active.pause();
       return;
     }
-    active.playbackRate = Math.max(-8, Math.min(8, diff * 14));
+    const rate = Math.max(-8, Math.min(8, diff * 14));
+    const clampedRate = Math.abs(rate) < 1 / 16 ? (rate < 0 ? -1 / 16 : 1 / 16) : rate;
+    try {
+      active.playbackRate = clampedRate;
+    } catch {
+      active.pause();
+      return;
+    }
     if (active.paused && !active.ended) {
       active.play().catch(() => undefined);
       this.startLoop();

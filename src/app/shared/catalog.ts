@@ -69,7 +69,7 @@ export const TEACHER_COUNT = 19;
 
 export const COURSE_TEACHER = 'Carlos Ribeiro';
 
-export const COURSE_TEACHER_PHOTO = 'assets/carlos-ribeiro.jpg';
+export const COURSE_TEACHER_PHOTO = 'assets/carlos-ribeiro.webp';
 
 export const MODALITIES: Modality[] = [
   {
@@ -79,8 +79,8 @@ export const MODALITIES: Modality[] = [
     blurb:
       'Movimentos naturais do dia a dia combinados com força e estabilidade. Um treino completo que melhora postura, coordenação e condicionamento — ideal para qualquer nível, do iniciante ao avançado.',
     icon: 'ph-person-simple-run',
-    image: 'assets/modalidades/modalidade-funcional.jpg',
-    teacher: 'assets/modalidades/prof-funcional.png',
+    image: 'assets/modalidades/modalidade-funcional.webp',
+    teacher: 'assets/modalidades/prof-funcional.webp',
   },
   {
     id: 'hitdance',
@@ -89,8 +89,8 @@ export const MODALITIES: Modality[] = [
     blurb:
       'Coreografias de alta intensidade ao som de muita música. Queime calorias, solte o corpo e fortaleça o coração em uma aula cheia de energia, onde a diversão é tão importante quanto o esforço.',
     icon: 'ph-heartbeat',
-    image: 'assets/modalidades/modalidade-hitdance.jpg',
-    teacher: 'assets/modalidades/prof-hitdance.png',
+    image: 'assets/modalidades/modalidade-hitdance.webp',
+    teacher: 'assets/modalidades/prof-hitdance.webp',
     dim: true,
   },
   {
@@ -100,8 +100,8 @@ export const MODALITIES: Modality[] = [
     blurb:
       'A música guia cada movimento. Aulas animadas que trabalham o corpo inteiro enquanto você se diverte — sem coreografia complicada, no seu próprio ritmo e com acompanhamento de perto.',
     icon: 'ph-music-notes',
-    image: 'assets/modalidades/modalidade-fitdance.jpg',
-    teacher: 'assets/modalidades/prof-fitdance.png',
+    image: 'assets/modalidades/modalidade-fitdance.webp',
+    teacher: 'assets/modalidades/prof-fitdance.webp',
   },
   {
     id: 'crossfit',
@@ -110,8 +110,8 @@ export const MODALITIES: Modality[] = [
     blurb:
       'Treinos de alta intensidade baseados nos exercícios do CrossFit. WODs que combinam levantamento, ginástica e cardio para construir força, condicionamento e superação em cada treino.',
     icon: 'ph-lightning',
-    image: 'assets/modalidades/modalidade-crossfit.jpg',
-    teacher: 'assets/modalidades/prof-crossfit.png',
+    image: 'assets/modalidades/modalidade-crossfit.webp',
+    teacher: 'assets/modalidades/prof-crossfit.webp',
   },
   {
     id: 'clube-ciclismo',
@@ -120,7 +120,7 @@ export const MODALITIES: Modality[] = [
     blurb:
       'Pedaladas em grupo para ganhar resistência e força nas pernas. Treinos guiados com intensidade variada, onde ninguém fica para trás e a motivação vem de pedalar junto.',
     icon: 'ph-bicycle',
-    image: 'assets/modalidades/modalidade-ciclismo.jpg',
+    image: 'assets/modalidades/modalidade-ciclismo.webp',
   },
   {
     id: 'aulas-coletivas',
@@ -129,7 +129,7 @@ export const MODALITIES: Modality[] = [
     blurb:
       'Treine em turmas com acompanhamento próximo do professor. A energia do grupo mantém a constância e cada aula é uma chance de evoluir junto com quem também quer resultado.',
     icon: 'ph-users-three',
-    image: 'assets/modalidades/modalidade-coletivas.jpg',
+    image: 'assets/modalidades/modalidade-coletivas.webp',
   },
 ];
 
@@ -154,7 +154,7 @@ export const PRODUCTS: Product[] = [
     name: 'Camisa Stilus',
     blurb: 'Camisa oficial da Academia Stilus.',
     price: 89.9,
-    image: 'assets/camisa-1.jpg',
+    image: 'assets/camisa-1.webp',
     category: 'Camisas',
   },
   {
@@ -162,7 +162,7 @@ export const PRODUCTS: Product[] = [
     name: 'Camisa Stilus Fit',
     blurb: 'Camisa esportiva da Academia Stilus.',
     price: 89.9,
-    image: 'assets/camisa-2.jpg',
+    image: 'assets/camisa-2.webp',
     category: 'Camisas',
   },
   {
@@ -170,7 +170,7 @@ export const PRODUCTS: Product[] = [
     name: 'Meia Stilus',
     blurb: 'Meia oficial da Academia Stilus.',
     price: 29.9,
-    image: 'assets/meia-1.jpg',
+    image: 'assets/meia-1.webp',
     category: 'Meias',
   },
   {
@@ -178,7 +178,7 @@ export const PRODUCTS: Product[] = [
     name: 'Meia Stilus Fit',
     blurb: 'Meia esportiva da Academia Stilus.',
     price: 29.9,
-    image: 'assets/meia-2.jpg',
+    image: 'assets/meia-2.webp',
     category: 'Meias',
   },
 ];

@@ -109,8 +109,9 @@
   .hero {
     position: sticky;
     top: 64px;
-    height: auto;
-    display: block;
+    min-height: calc(100dvh - 64px);
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
   }
 
@@ -118,8 +119,7 @@
     position: relative;
     inset: auto;
     width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
+    height: 320px;
     object-fit: cover;
   }
 
@@ -135,7 +135,21 @@
     position: relative;
     max-width: none;
     margin-inline: 0;
-    padding: 32px 0 48px;
+    margin-top: auto;
+    padding: 20px 0 32px;
+  }
+
+  .hero-copy {
+    padding: 20px 18px;
+  }
+
+  .hero-overline {
+    margin-bottom: 14px;
+  }
+
+  .hero-sub {
+    margin-bottom: 26px;
+    font-size: 0.98rem;
   }
 }
 

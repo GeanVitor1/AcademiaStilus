@@ -10,7 +10,7 @@ import { TextRevealDirective } from '../../directives/text-reveal.directive';
   styleUrl: './facilities.scss',
 })
 export class Facilities {
-  readonly ownerPhoto = 'assets/dono.jpeg';
+  readonly ownerPhoto = 'assets/dono.webp';
 
   readonly facilities = [
     { name: 'Música', icon: 'ph-music-notes' },

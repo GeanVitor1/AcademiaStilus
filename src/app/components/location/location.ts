@@ -6,7 +6,7 @@ import {
   OnDestroy,
   viewChild,
 } from '@angular/core';
-import * as L from 'leaflet';
+import type * as L from 'leaflet';
 import { RevealDirective } from '../../directives/reveal.directive';
 import { TextRevealDirective } from '../../directives/text-reveal.directive';
 import { GYM_ADDRESS, GYM_COORDS, GYM_MAPS_URL, GYM_NAME } from '../../shared/catalog';
@@ -29,12 +29,38 @@ export class Location implements AfterViewInit, OnDestroy {
   private map?: L.Map;
   private resizeObserver?: ResizeObserver;
   private visibilityObserver?: IntersectionObserver;
+  private initObserver?: IntersectionObserver;
+  private mapInited = false;
 
   get whatsappUrl(): string {
     return this.wa.contactUrl;
   }
 
   ngAfterViewInit(): void {
+    const el = this.mapContainer().nativeElement;
+    if (!('IntersectionObserver' in window)) {
+      this.initMap();
+      return;
+    }
+    this.initObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          this.initObserver?.disconnect();
+          this.initMap();
+        }
+      },
+      { rootMargin: '400px 0px' }
+    );
+    this.initObserver.observe(el);
+  }
+
+  private async initMap(): Promise<void> {
+    if (this.mapInited) {
+      return;
+    }
+    this.mapInited = true;
+    const L = await import('leaflet');
+
     const el = this.mapContainer().nativeElement;
     const map = L.map(el, {
       center: [this.coords.lat, this.coords.lng],
@@ -101,6 +127,7 @@ export class Location implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.initObserver?.disconnect();
     this.visibilityObserver?.disconnect();
     this.resizeObserver?.disconnect();
     this.map?.remove();
