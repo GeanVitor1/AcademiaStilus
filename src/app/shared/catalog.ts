@@ -36,10 +36,12 @@ export interface GymRule {
 export interface GymPlan {
   id: string;
   name: string;
-  price: number;
+  price?: number;
   period: string;
   icon: string;
   features: string[];
+  badge?: string;
+  cta?: string;
   highlight?: boolean;
 }
 
@@ -259,15 +261,16 @@ export const PLANS: GymPlan[] = [
   },
   {
     id: 'gympass',
-    name: 'Gympass Basic+',
-    price: 99,
-    period: 'por mês via Gympass',
+    name: 'Gympass',
+    badge: 'Aceita Gympass',
+    period: 'Seu benefício vale aqui',
     icon: 'ph-credit-card',
     features: [
-      'Aceita Gympass',
-      'Plano Basic+ por R$ 99',
+      'Aceita o plano Basic+ e demais',
       'Todas as modalidades',
+      'Acompanhamento dos professores',
     ],
+    cta: 'Tenho Gympass',
   },
 ];
 

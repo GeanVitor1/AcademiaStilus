@@ -18,10 +18,18 @@
             <i class="ph plan-icon" [class]="plan.icon" aria-hidden="true"></i>
           </div>
 
-          <p class="plan-price">
-            <span class="plan-currency">R$</span>{{ plan.price }}
-          </p>
-          <p class="plan-period">{{ plan.period }}</p>
+          @if (plan.price) {
+            <p class="plan-price">
+              <span class="plan-currency">R$</span>{{ plan.price }}
+            </p>
+            <p class="plan-period">{{ plan.period }}</p>
+          } @else {
+            <div class="plan-badge">
+              <i class="ph ph-check-circle" aria-hidden="true"></i>
+              {{ plan.badge }}
+            </div>
+            <p class="plan-period">{{ plan.period }}</p>
+          }
 
           <ul class="plan-features">
             @for (feature of plan.features; track feature) {
@@ -35,11 +43,11 @@
           <a
             class="btn plan-cta"
             [class.btn-yellow]="plan.highlight"
-            [href]="planLink(plan.name)"
+            [href]="planLink(plan)"
             target="_blank"
             rel="noopener"
           >
-            Quero este plano
+            {{ plan.cta ?? 'Quero este plano' }}
           </a>
         </article>
       }
