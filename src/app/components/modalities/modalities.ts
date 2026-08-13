@@ -15,6 +15,7 @@ const NOTCH_PX = 120;
 const STEP_PX = 240;
 const SWIPE_PX = 40;
 const SNAP_MS = 420;
+const SNAP_MS_TOUCH = 340;
 
 @Component({
   selector: 'app-modalities',
@@ -190,7 +191,7 @@ export class Modalities implements AfterViewInit, OnDestroy {
       this.trySnap();
       return;
     }
-    this.animateScroll(top, SNAP_MS, () => {
+    this.animateScroll(top, this.isTouch ? SNAP_MS_TOUCH : SNAP_MS, () => {
       this.animating = false;
       this.trySnap();
     });
@@ -210,7 +211,7 @@ export class Modalities implements AfterViewInit, OnDestroy {
       window.scrollTo({ top, behavior: 'auto' });
       return;
     }
-    this.animateScroll(top, SNAP_MS, () => undefined);
+    this.animateScroll(top, this.isTouch ? SNAP_MS_TOUCH : SNAP_MS, () => undefined);
   }
 
   private animateScroll(
