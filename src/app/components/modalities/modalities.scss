@@ -62,12 +62,6 @@
   min-height: 100dvh;
 }
 
-@media (pointer: coarse) {
-  .modality-item {
-    scroll-snap-align: start;
-  }
-}
-
 .modality-caption {
   position: absolute;
   inset: 0;
