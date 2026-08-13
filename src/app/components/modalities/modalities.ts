@@ -14,6 +14,7 @@ import { MODALITIES } from '../../shared/catalog';
 const NOTCH_PX = 120;
 const STEP_PX = 240;
 const SWIPE_PX = 40;
+const SNAP_MS = 420;
 
 @Component({
   selector: 'app-modalities',
@@ -31,8 +32,6 @@ export class Modalities implements AfterViewInit, OnDestroy {
   private readonly isTouch =
     typeof window !== 'undefined' &&
     window.matchMedia('(pointer: coarse)').matches;
-  private readonly supportsScrollEnd =
-    typeof window !== 'undefined' && 'onscrollend' in window;
 
   private items: HTMLElement[] = [];
   private stageEl?: HTMLElement;
@@ -181,27 +180,20 @@ export class Modalities implements AfterViewInit, OnDestroy {
 
   private animateTo(target: number): void {
     this.animating = true;
+    const top = this.items[target].getBoundingClientRect().top + window.scrollY;
     const reduceMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches;
-    window.scrollTo({
-      top: this.items[target].getBoundingClientRect().top + window.scrollY,
-      behavior: reduceMotion ? 'auto' : 'smooth',
-    });
     if (reduceMotion) {
+      window.scrollTo({ top, behavior: 'auto' });
       this.animating = false;
       this.trySnap();
       return;
     }
-    const finish = (): void => {
+    this.animateScroll(top, SNAP_MS, () => {
       this.animating = false;
       this.trySnap();
-    };
-    if (this.supportsScrollEnd) {
-      window.addEventListener('scrollend', finish, { once: true });
-    } else {
-      window.setTimeout(finish, 800);
-    }
+    });
   }
 
   private scrollOut(dir: number): void {
@@ -214,10 +206,36 @@ export class Modalities implements AfterViewInit, OnDestroy {
           window.scrollY +
           window.innerHeight
         : this.el.nativeElement.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({
-      top,
-      behavior: reduceMotion ? 'auto' : 'smooth',
-    });
+    if (reduceMotion) {
+      window.scrollTo({ top, behavior: 'auto' });
+      return;
+    }
+    this.animateScroll(top, SNAP_MS, () => undefined);
+  }
+
+  private animateScroll(
+    targetTop: number,
+    duration: number,
+    onDone: () => void
+  ): void {
+    const start = window.scrollY;
+    const distance = targetTop - start;
+    if (Math.abs(distance) < 1) {
+      onDone();
+      return;
+    }
+    const startTime = performance.now();
+    const easeOut = (t: number): number => 1 - Math.pow(1 - t, 3);
+    const step = (now: number): void => {
+      const t = Math.min(1, (now - startTime) / duration);
+      window.scrollTo({ top: start + distance * easeOut(t), behavior: 'instant' });
+      if (t < 1) {
+        requestAnimationFrame(step);
+      } else {
+        onDone();
+      }
+    };
+    requestAnimationFrame(step);
   }
 
   private updateTouchAction(): void {
