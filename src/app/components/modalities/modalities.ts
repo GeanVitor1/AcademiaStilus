@@ -16,6 +16,8 @@ const STEP_PX = 240;
 const SWIPE_PX = 40;
 const SNAP_MS = 420;
 const SNAP_MS_TOUCH = 340;
+const WHEEL_REST_MS = 250;
+const TOUCH_WHEEL_DEBOUNCE_MS = 500;
 
 @Component({
   selector: 'app-modalities',
@@ -39,6 +41,8 @@ export class Modalities implements AfterViewInit, OnDestroy {
   private currentTarget = 0;
   private deltaAccum = 0;
   private animating = false;
+  private wheelRestUntil = 0;
+  private lastTouchAt = 0;
   private exitDir = 0;
   private touchIntercepting = false;
   private touchStartX = 0;
@@ -61,20 +65,22 @@ export class Modalities implements AfterViewInit, OnDestroy {
     this.el.nativeElement.addEventListener('wheel', this.onWheelBound, {
       passive: false,
     });
-    if (this.isTouch) {
-      const stage = this.el.nativeElement.querySelector('.modalities-stage');
-      if (stage instanceof HTMLElement) {
-        this.stageEl = stage;
-        stage.addEventListener('touchstart', this.onTouchStartBound, {
+    const stage = this.el.nativeElement.querySelector('.modalities-stage');
+    if (stage instanceof HTMLElement) {
+      this.stageEl = stage;
+      stage.addEventListener('touchstart', this.onTouchStartBound, {
+        passive: true,
+      });
+      stage.addEventListener('touchmove', this.onTouchMoveBound, {
+        passive: false,
+      });
+      stage.addEventListener('touchend', this.onTouchEndBound, {
+        passive: true,
+      });
+      if (this.isTouch) {
+        window.addEventListener('scroll', this.onScrollBound, {
           passive: true,
         });
-        stage.addEventListener('touchmove', this.onTouchMoveBound, {
-          passive: false,
-        });
-        stage.addEventListener('touchend', this.onTouchEndBound, {
-          passive: true,
-        });
-        window.addEventListener('scroll', this.onScrollBound, { passive: true });
         window.addEventListener('resize', this.onScrollBound);
         this.updateTouchAction();
       }
@@ -94,20 +100,27 @@ export class Modalities implements AfterViewInit, OnDestroy {
   }
 
   private onWheel(event: WheelEvent): void {
-    if (this.isTouch || event.deltaY === 0) return;
+    if (event.deltaY === 0) return;
     if (!this.coversViewport()) {
       this.exitDir = 0;
       return;
     }
 
+    const now = performance.now();
     const dir = Math.sign(event.deltaY);
     if (dir === this.exitDir) return;
     this.exitDir = 0;
 
-    if (!this.animating) {
-      this.currentTarget = this.positionIndex();
+    if (
+      this.animating ||
+      now < this.wheelRestUntil ||
+      now - this.lastTouchAt < TOUCH_WHEEL_DEBOUNCE_MS
+    ) {
+      event.preventDefault();
+      return;
     }
 
+    this.currentTarget = this.positionIndex();
     const px =
       event.deltaMode === 1
         ? event.deltaY * 16
@@ -147,6 +160,7 @@ export class Modalities implements AfterViewInit, OnDestroy {
   private onTouchEnd(): void {
     if (!this.touchIntercepting) return;
     this.touchIntercepting = false;
+    this.lastTouchAt = performance.now();
     const dy = this.touchLastY - this.touchStartY;
     if (Math.abs(dy) < SWIPE_PX) return;
     const dir = dy < 0 ? 1 : -1;
@@ -174,7 +188,7 @@ export class Modalities implements AfterViewInit, OnDestroy {
       }
       return;
     }
-    this.deltaAccum -= dir * STEP_PX;
+    this.deltaAccum = 0;
     this.currentTarget = target;
     this.animateTo(target);
   }
@@ -188,12 +202,12 @@ export class Modalities implements AfterViewInit, OnDestroy {
     if (reduceMotion) {
       window.scrollTo({ top, behavior: 'auto' });
       this.animating = false;
-      this.trySnap();
       return;
     }
-    this.animateScroll(top, this.isTouch ? SNAP_MS_TOUCH : SNAP_MS, () => {
+    const duration = this.isTouch ? SNAP_MS_TOUCH : SNAP_MS;
+    this.wheelRestUntil = performance.now() + duration + WHEEL_REST_MS;
+    this.animateScroll(top, duration, () => {
       this.animating = false;
-      this.trySnap();
     });
   }
 
@@ -211,7 +225,11 @@ export class Modalities implements AfterViewInit, OnDestroy {
       window.scrollTo({ top, behavior: 'auto' });
       return;
     }
-    this.animateScroll(top, this.isTouch ? SNAP_MS_TOUCH : SNAP_MS, () => undefined);
+    this.animateScroll(
+      top,
+      this.isTouch ? SNAP_MS_TOUCH : SNAP_MS,
+      () => undefined
+    );
   }
 
   private animateScroll(
@@ -225,14 +243,18 @@ export class Modalities implements AfterViewInit, OnDestroy {
       onDone();
       return;
     }
+    const root = document.documentElement;
+    const prevBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
     const startTime = performance.now();
     const easeOut = (t: number): number => 1 - Math.pow(1 - t, 3);
     const step = (now: number): void => {
       const t = Math.min(1, (now - startTime) / duration);
-      window.scrollTo({ top: start + distance * easeOut(t), behavior: 'instant' });
+      window.scrollTo(0, start + distance * easeOut(t));
       if (t < 1) {
         requestAnimationFrame(step);
       } else {
+        root.style.scrollBehavior = prevBehavior;
         onDone();
       }
     };
@@ -266,8 +288,10 @@ export class Modalities implements AfterViewInit, OnDestroy {
       this.stageEl.removeEventListener('touchstart', this.onTouchStartBound);
       this.stageEl.removeEventListener('touchmove', this.onTouchMoveBound);
       this.stageEl.removeEventListener('touchend', this.onTouchEndBound);
-      window.removeEventListener('scroll', this.onScrollBound);
-      window.removeEventListener('resize', this.onScrollBound);
+      if (this.isTouch) {
+        window.removeEventListener('scroll', this.onScrollBound);
+        window.removeEventListener('resize', this.onScrollBound);
+      }
     }
   }
 }
