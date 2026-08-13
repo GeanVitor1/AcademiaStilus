@@ -24,6 +24,9 @@ export class Modalities implements AfterViewInit {
 
   private readonly el = inject(ElementRef<HTMLElement>);
   private readonly stepPx = 240;
+  private readonly isTouch =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(pointer: coarse)').matches;
   private items: HTMLElement[] = [];
   private deltaAccum = 0;
   private exitDir = 0;
@@ -44,7 +47,7 @@ export class Modalities implements AfterViewInit {
   }
 
   private onWheel(event: WheelEvent): void {
-    if (event.deltaY === 0) return;
+    if (this.isTouch || event.deltaY === 0) return;
 
     const section = this.el.nativeElement;
     const rect = section.getBoundingClientRect();
