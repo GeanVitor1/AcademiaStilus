@@ -55,6 +55,7 @@ export class Modalities implements AfterViewInit, OnDestroy {
   private readonly onTouchMoveBound = (event: TouchEvent) =>
     this.onTouchMove(event);
   private readonly onTouchEndBound = () => this.onTouchEnd();
+  private readonly onTouchCancelBound = () => this.onTouchCancel();
   private readonly onScrollBound = () => this.updateTouchAction();
 
   ngAfterViewInit(): void {
@@ -75,6 +76,9 @@ export class Modalities implements AfterViewInit, OnDestroy {
         passive: false,
       });
       stage.addEventListener('touchend', this.onTouchEndBound, {
+        passive: true,
+      });
+      stage.addEventListener('touchcancel', this.onTouchCancelBound, {
         passive: true,
       });
       if (this.isTouch) {
@@ -134,6 +138,7 @@ export class Modalities implements AfterViewInit, OnDestroy {
   private onTouchStart(event: TouchEvent): void {
     if (!this.coversViewport() || event.touches.length !== 1) {
       this.touchIntercepting = false;
+      this.exitDir = 0;
       return;
     }
     if (!this.animating) {
@@ -167,6 +172,11 @@ export class Modalities implements AfterViewInit, OnDestroy {
     if (dir === this.exitDir) return;
     this.exitDir = 0;
     this.addDelta(STEP_PX, dir);
+  }
+
+  private onTouchCancel(): void {
+    this.touchIntercepting = false;
+    this.lastTouchAt = performance.now();
   }
 
   private addDelta(px: number, dir: number): void {
@@ -288,6 +298,7 @@ export class Modalities implements AfterViewInit, OnDestroy {
       this.stageEl.removeEventListener('touchstart', this.onTouchStartBound);
       this.stageEl.removeEventListener('touchmove', this.onTouchMoveBound);
       this.stageEl.removeEventListener('touchend', this.onTouchEndBound);
+      this.stageEl.removeEventListener('touchcancel', this.onTouchCancelBound);
       if (this.isTouch) {
         window.removeEventListener('scroll', this.onScrollBound);
         window.removeEventListener('resize', this.onScrollBound);
