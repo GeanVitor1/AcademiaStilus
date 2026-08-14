@@ -2,7 +2,7 @@
   <div class="container">
     <h2 class="display display-lg section-title" appTextReveal>Planos</h2>
     <p class="section-sub" appReveal [appRevealDelay]="80">
-      Escolha o plano que combina com você. Diária, mensal ou Gympass.
+      Escolha o plano que combina com você. Diária, mensal, Gympass ou Total Pass.
     </p>
 
     <div class="plans-grid">
@@ -22,6 +22,16 @@
             <p class="plan-price">
               <span class="plan-currency">R$</span>{{ plan.price }}
             </p>
+            <p class="plan-period">{{ plan.period }}</p>
+          } @else if (plan.badgeItems) {
+            <div class="plan-badge">
+              <span class="plan-badge-label">{{ plan.badgeLabel }}</span>
+              <span class="plan-badge-items">
+                @for (item of plan.badgeItems; track item) {
+                  <span class="plan-badge-item">{{ item }}</span>
+                }
+              </span>
+            </div>
             <p class="plan-period">{{ plan.period }}</p>
           } @else {
             <div class="plan-badge">

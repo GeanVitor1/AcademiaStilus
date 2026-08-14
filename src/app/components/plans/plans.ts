@@ -18,7 +18,7 @@ export class Plans {
   planLink(plan: GymPlan): string {
     const message =
       plan.id === 'gympass'
-        ? 'Olá! Tenho Gympass e quero treinar na Academia Stilus.'
+        ? 'Olá! Tenho Gympass ou Total Pass e quero treinar na Academia Stilus.'
         : `Olá! Quero o plano ${plan.name} da Academia Stilus.`;
     return this.wa.link(message);
   }

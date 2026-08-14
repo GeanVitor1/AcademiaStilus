@@ -87,24 +87,39 @@
 }
 
 .plan-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   margin: 2px 0 0;
-  padding: 10px 16px;
+  padding: 12px 16px;
   border: 2px solid var(--yellow);
   background: rgba(255, 214, 10, 0.08);
   border-radius: var(--radius-sm);
+}
+
+.plan-badge .ph {
+  font-size: 1.1rem;
+}
+
+.plan-badge-label {
   color: var(--yellow);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  line-height: 1.2;
 }
 
-.plan-badge .ph {
-  font-size: 1.1rem;
+.plan-badge-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.plan-badge-item {
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .plan-period {

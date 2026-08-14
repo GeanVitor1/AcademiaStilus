@@ -41,6 +41,8 @@ export interface GymPlan {
   icon: string;
   features: string[];
   badge?: string;
+  badgeLabel?: string;
+  badgeItems?: string[];
   cta?: string;
   highlight?: boolean;
 }
@@ -248,7 +250,7 @@ export const PLANS: GymPlan[] = [
   {
     id: 'mensal',
     name: 'Mensal',
-    price: 120,
+    price: 140,
     period: 'por mês',
     icon: 'ph-calendar-check',
     features: [
@@ -262,15 +264,17 @@ export const PLANS: GymPlan[] = [
   {
     id: 'gympass',
     name: 'Gympass',
-    badge: 'Aceita Gympass',
+    badgeLabel: 'Aceitamos:',
+    badgeItems: ['Wellhub (Gympass)', 'Total Pass'],
     period: 'Seu benefício vale aqui',
     icon: 'ph-credit-card',
     features: [
       'Aceita o plano Basic+ e demais',
+      'Aceita Total Pass',
       'Todas as modalidades',
       'Acompanhamento dos professores',
     ],
-    cta: 'Tenho Gympass',
+    cta: 'Tenho Gympass ou Total Pass',
   },
 ];
 
